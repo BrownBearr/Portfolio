@@ -1,3 +1,11 @@
-.h1{
-    color: blue;
+.body{
+    
 }
+
+.nav{
+    list-style: none;
+    color: #3737d6; 
+    flex-direction: column;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
