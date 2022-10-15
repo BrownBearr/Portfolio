@@ -1,0 +1,681 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Replasticing Project</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c1031515-e78c-4205-9272-4344feacbd94" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔧</span></div><h1 class="page-title">The Replasticing Project</h1><table class="properties"><tbody><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Column</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-red">Class Project</span><span class="selected-value select-value-color-pink">Personal Projects</span><span class="selected-value select-value-color-blue">Spring2022</span></td></tr></tbody></table></header><div class="page-body"><figure id="028e9ca2-4ff0-4d0d-9eca-1f31f9c31d49" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7091.jpg"><img style="width:4032px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7091.jpg"/></a></figure><h1 id="a4a16ced-e7d8-4b15-9519-480dfbffad28" class="">What is the Replasticing Project</h1><p id="834ca6a7-c3ef-4aca-a3d7-6924bf3c96f1" class="">Replasticing is both a class and an initiative sponsored by the NYU Makerspace to try to turn the excess PLA plastic into something new and divert them from entering the waste pipeline. </p><p id="db591ed2-bef3-429b-b56d-dd3f950a1bb7" class="">
+</p><p id="35ee041e-790f-4850-8521-89f9829c8484" class="">As a part of the class, we were able to access to the NYU makerspace and take on specific projects to try to tackle the issue of excess PLA.</p><p id="2f67b2bd-481b-472b-b837-9c9e16dab37a" class="">
+</p><p id="c7e42e9a-71c9-4b9d-a0e2-14f6d9aed028" class="">I joined the Sheets Team, a group dedicated to melting PLA scraps into sheets which can then be used much like acrylic.</p><p id="54617ce1-3443-46b2-9552-7d27fb4a5aec" class="">
+</p><h1 id="600c7b94-27e8-496b-b4a9-a9ebc5ce1d8e" class="">3 Stage Sheet Process</h1><ol type="1" id="e1442a3c-c133-4953-a6b1-1fbfb1ceddf5" class="numbered-list" start="1"><li>Measure</li></ol><ol type="1" id="6ffaa6f1-137b-4e79-9a0c-d66d1fe94cee" class="numbered-list" start="2"><li>Melt</li></ol><ol type="1" id="d4a40e82-0cb7-46fa-a474-f7ba8df9c65d" class="numbered-list" start="3"><li>Cool</li></ol><p id="2dd6243f-d615-4531-8356-65554adafdf3" class="">
+</p><div id="8cab9dca-8c22-4371-bf69-c3c8d37921d9" class="column-list"><div id="feecaaac-fb59-476f-a86e-a463adc780f4" style="width:33.333333333333336%" class="column"><figure id="6c3ab1c5-8800-4055-965a-01ec9360a6ea" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7022.jpg"><img style="width:4032px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7022.jpg"/></a></figure></div><div id="d9c72184-4c74-4c88-8218-143ecb5c6d31" style="width:33.333333333333336%" class="column"><figure id="7dbc43d7-3b3c-4f3d-8e8a-f2125e8597f3" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7023.jpg"><img style="width:4032px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7023.jpg"/></a></figure></div><div id="bf98d66b-34b7-41b8-8038-d6a58dbb7c74" style="width:33.33333333333333%" class="column"><figure id="9530ea19-7598-45ca-ab6e-dc5eab55b0bc" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7024.jpg"><img style="width:4032px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7024.jpg"/></a></figure></div></div><p id="3b34f041-9fd5-4683-9515-5cf9a278d0d8" class="">Using this simple but effective process, we can melt scrap PLA into sheets that can then be repurposed. </p><p id="ab3cd369-fbb0-41f2-93bd-11006b127285" class="">
+</p><h1 id="5e8dfc43-0652-43ee-9d5b-5550bb01ebc6" class="">Production</h1><p id="201c8c99-5504-4a0f-8a7f-dae89679de32" class="">These sheets have the ability to be treated much like acrylic</p><p id="9b4be6fb-c0b6-409c-88a4-ea0f6331b3b3" class="">This goes to say that they can be bandsawed and laser cut!</p><p id="d72f02b8-28fd-48e4-a45d-2bdb07948bdd" class="">
+</p><figure id="266131e1-0177-407a-b2d6-8ff7c472b02f" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/ezgif-3-fb130a7661.gif"><img style="width:600px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/ezgif-3-fb130a7661.gif"/></a></figure><p id="3cfee901-7805-4643-ba07-313c4518a5d1" class="">
+</p><p id="06dfc01b-7822-4801-9fe3-c5e603b120fb" class="">With laser cutting the sheets, we can now make them usable prototyping material for students that was initially scrap/trash</p><p id="bf4f3893-94fd-4b26-a849-236672163604" class="">
+</p><p id="c1dccaa7-2b71-4ca0-a18e-4b5ada35675c" class="">Students are able to express creativity and prototype using this easy to use material.</p><p id="93caff25-e6cc-4b56-aece-f3eeb454511d" class="">
+</p><p id="aba36ac7-9e43-4b60-bef3-6ace1aeec9a3" class=""><strong>Some of the benefits of this material are:</strong></p><ol type="1" id="0e35d155-d26c-44e8-8b62-fcbbc884de78" class="numbered-list" start="1"><li>Mistakes can be remelted into new sheets</li></ol><ol type="1" id="b2ac8913-caae-43ea-bcb1-a6cc9031eb52" class="numbered-list" start="2"><li>Cheap</li></ol><ol type="1" id="303d319b-a548-4c6e-86c3-b3bb2e264488" class="numbered-list" start="3"><li>Any miscuts can be easily solved with a heat gun</li></ol><ol type="1" id="75342c32-9a52-47f2-8cce-52964efcf167" class="numbered-list" start="4"><li>Wonderful color variety</li></ol><p id="4239139d-20c0-4e46-9fe1-b330f5102a85" class="">
+</p><h1 id="87f6b461-98d2-470a-87b8-2982c10c4efe" class="">Products</h1><div id="eae4eac1-be6d-4d3e-bb57-f077807717f0" class="column-list"><div id="2b0e215b-02ad-48c7-83d2-c3b68352bbf2" style="width:50%" class="column"><figure id="b94ea758-9c71-48bf-9d9d-b98220bb3b30" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/73358FD7-7DB7-4567-BA90-0D6503EB4340.jpg"><img style="width:1122px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/73358FD7-7DB7-4567-BA90-0D6503EB4340.jpg"/></a></figure></div><div id="f67d518c-60a8-4809-9943-1e3e95e6cc44" style="width:50%" class="column"><figure id="7b9f082a-15b9-43cc-a248-7e8d1bf3bec7" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7077.jpg"><img style="width:4032px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/IMG_7077.jpg"/></a></figure></div></div><figure id="7a919934-c216-4b19-ad0a-e217b377c446" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/fightstick_gif.gif"><img style="width:600px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/fightstick_gif.gif"/></a></figure><div id="0adf2486-7468-410d-9a30-1fbbbe8a8510" class="column-list"><div id="5bf8a048-84fe-495c-8caf-efee188d1b49" style="width:50%" class="column"><figure id="addc19a4-e4ad-4a63-be59-dd25355b0c3e" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/ezgif-4-499b964e75.gif"><img style="width:600px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/ezgif-4-499b964e75.gif"/></a></figure></div><div id="f8cc1bf1-c5c8-4d61-88be-cec844ba66c5" style="width:50%" class="column"><figure id="1c6dc4b7-8e8d-489f-995f-178019ca02a7" class="image"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/ezgif-4-38de1da895.gif"><img style="width:600px" src="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/ezgif-4-38de1da895.gif"/></a></figure></div></div><h1 id="59747610-bda3-4790-ace0-8ec32b9a115e" class="">Documentation</h1><figure id="38eeca83-c8ef-4199-bff7-e5b83bab8d8e"><a href="https://drive.google.com/drive/folders/1KJVUPeoqSe3aw4mahjyfRSkVlulQCcrK?usp=sharing" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">RePlasticing Sheets Group Project - Google Drive</div></div><div class="bookmark-href"><img src="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" class="icon bookmark-icon"/>https://drive.google.com/drive/folders/1KJVUPeoqSe3aw4mahjyfRSkVlulQCcrK?usp=sharing</div></div><img src="https://drive-thirdparty.googleusercontent.com/128/type/application/vnd.google-apps.spreadsheet" class="bookmark-image"/></a></figure><h1 id="f808d1d9-d7c1-4cff-a41c-c55bb77d71e9" class="">Presentations</h1><figure id="ae705ad2-5134-4e5e-8a02-6f01bcab1a31"><div class="source"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/UX_Design_Final.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5068323f-17e7-419f-8cc6-f159cf9a62b4/UX_Design_Final.pdf</a></div></figure><figure id="3c239541-c589-4b58-88ad-59908f8a4a58"><div class="source"><a href="The%20Replasticing%20Project%20c1031515e78c420592724344feacbd94/PLA_Scrap_Sheet_Making_Process.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a4fcea17-5ef7-4919-a4c0-f6f9cdd19d5b/PLA_Scrap_Sheet_Making_Process.pdf</a></div></figure><p id="571c3290-9337-4c64-b3e1-e59cd54ffe6e" class="">
+</p><h1 id="0fb17b6e-8aec-4050-8851-b6d2041d0632" class="">Appreciations</h1><p id="00224b9d-6e4a-4314-acce-bfb31a6d68d6" class="">Thank you to the following people:</p><p id="598aab64-f979-4f3d-b2cb-55bd49d16397" class=""><strong>Molly Ritmiller &amp; Blair Simmons</strong></p><p id="5b25feff-975c-40e2-af1a-7ad3ecb41878" class=""><strong>Lauren Lumbra</strong></p><p id="178b79c6-bbcf-441e-91f7-8b711eba282a" class=""><strong>NYU Makerspace team</strong></p><p id="ca40721e-6d51-4f62-a4c8-7a4c43da9eae" class=""><strong>Replasticing Team</strong></p><p id="fb2c6e18-e297-432f-bd8b-c67d8fb26131" class=""><strong>Nick Boss</strong></p><p id="bd9e21c8-b695-4e2d-8b6a-89de38c14803" class=""><strong>Friends and family</strong></p><p id="0e9490e9-0523-4381-8eb4-c08b5f306f17" class="">
+</p></div></article></body></html>
