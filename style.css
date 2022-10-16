@@ -15,6 +15,7 @@ body{
 
 
 
+
 @keyframes logoAnim {
     0% {transform: translateY(0)}
     100% {transform: translateY(20px)}
@@ -39,12 +40,12 @@ body{
 
 
 
-.projectIntro{
+.projectsIntro{
    
     width: 500px;
     height: auto;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+    margin-left: auto;
+    margin-right: auto;
    
     color: white;
     transition: background-color 5s ease-out;
@@ -58,22 +59,16 @@ body{
 
 
 
-logo{
-    display: flex;
-}
+  
 .proj {
-    width: 50%;
-    max-width: 50%;
+    width: 75%;
+    
     display: flex;
     margin-left: auto;
     margin-right: auto;
    
 }
 
-.projectIntro:hover {
-    color: #3737d6;
-    
-}
 
 
 
@@ -131,16 +126,15 @@ a {
     font-weight: 100;
 }
 
-.projectIntro a:hover{
+.projectsIntro h1:hover{
     font-weight: 100;
 }
 
-.projectIntro h1:hover{
-    font-weight: 100;
+@media screen and (min-width: 900px){
+    .gallery{
+        display: flex;
+    }
 }
+    
 
-@keyframes 
-
-
-
-
+    
