@@ -1,0 +1,38 @@
+body{
+    background-color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #3737d6;
+    margin: 0;
+    padding: 0;
+}
+
+.svgLogo{
+    width: 100px;
+    height: auto;
+    margin-left: 20px;
+}
+
+.nav{
+    list-style: none;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.navBar{
+    display: flex;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+}
+
+.profile{
+    width: 50%;
+    max-width: 100%;
+    display: flex;
+ 
+   
+}

@@ -2,12 +2,20 @@ body{
     background-color: #3737d6;
     font-family: 'Space Grotesk', sans-serif;
     color: white;
+    margin: 0px;
+    padding: 0px;
 }
 
 .svgLogo{
     width: 100px;
     height: auto;
     margin-left: 20px;
+    animation: logoAnim 2s linear infinite alternate;
+}
+
+@keyframes logoAnim {
+    0% {transform: translateY(0)}
+    100% {transform: translateY(20px)}
 }
 
 .nav{
@@ -28,29 +36,53 @@ body{
 }
 
 .projectIntro{
+   
     width: 500px;
     height: auto;
+    display: grid;
+grid-template-rows: 1fr 1fr;
+   
+    background-color: #3737d6;
+    transition: background-color 5s ease-out;
 }
+
+/* .projectIntro:hover{
+    background-color: white;
+    color: #3737d6;
+    cursor: pointer;
+} */
+
+
 
 logo{
     display: flex;
 }
 .proj {
     width: 50%;
-    max-width: 75%;
-    display: block;
+    max-width: 50%;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
+   
 }
+
+.projectIntro:hover {
+    color: #3737d6;
+    
+}
+
+
 
 .projectStory{
     text-align: center;
     font-size: 24px;
     margin-bottom: 100px;
+    
 }
 
 .intro{
     text-align: center;
+    margin-bottom: 100px;
 }
 
 .fight{
@@ -58,13 +90,33 @@ logo{
     margin-top: 65px;
 }
 
+.profile{
+    width: 50%;
+    max-width: 100%;
+    display: flex;
+ 
+   
+}
+
 .heading{
     text-align: center;
 }
 
-@media (max-width 600px) {
-    .projectIntro{
-        display: flex;
-        align-items: center;
-    }
+
+
+
+a {
+    text-decoration: none;
+    color: white;
+    
 }
+
+.navBar a {
+    color: #3737d6;
+}
+
+@keyframes 
+
+
+
+

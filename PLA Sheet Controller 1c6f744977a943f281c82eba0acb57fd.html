@@ -1,0 +1,708 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>PLA Sheet Controller</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1c6f7449-77a9-43f2-81c8-2eba0acb57fd" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">♠️</span></div><h1 class="page-title">PLA Sheet Controller</h1><table class="properties"><tbody><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>Column</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-red">Class Project</span><span class="selected-value select-value-color-pink">Personal Projects</span><span class="selected-value select-value-color-blue">Spring2022</span></td></tr></tbody></table></header><div class="page-body"><figure id="e816a76b-b910-41b3-abcf-1cf0471875e7" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/D2282540-722B-49C5-B7C7-624CE47C17DF.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/D2282540-722B-49C5-B7C7-624CE47C17DF.jpeg"/></a></figure><h1 id="67682a50-c064-46be-9381-e46a5ccb8d96" class="">IDEA</h1><p id="a8f555c0-3d93-40bf-99e2-2f977b2f9a60" class="">Use sustainable materials to create a hitbox style controller. </p><p id="1f7c7e1e-7f47-45e9-bb9c-c18fe4d68c2b" class="">Design it to withstand the mashing in a fighting game</p><p id="ba8aa389-31f8-4a34-8379-0f272e9bbc88" class="">Make it something I will use in the future</p><p id="711c7cfe-9ebe-4359-8113-fac720566bd1" class="">
+</p><h1 id="7038b107-a8a2-4221-bd50-f88509e6e404" class="">Inspiration</h1><p id="2035a6d9-a9a3-4690-898b-2dc47beecd0d" class="">Inspired by the DIY nature of the fighting game community</p><p id="28e1fd92-20d7-4b0d-8036-9040db64cc5e" class="">Seen fightsticks made from everything from “xbox cases to shoe boxes”</p><p id="c1cba284-7c32-4520-94da-5f93ea19b115" class="">Want to contribute to this endeavor by prototyping with a unique material</p><p id="aad38c62-5fb2-45b4-8307-c24422654d56" class="">Inspired by the sustainability efforts of the NYU Makerspace and the RePlasticing class</p><p id="5bbe62a5-65f1-419f-9d5f-9aff47b7db51" class="">Want to use melted PLA plastic scrap from 3D prints to create a new fightstick.</p><p id="71a680c4-2af8-488d-ae3f-982e90dd9796" class="">
+</p><h1 id="acb4adb1-cd29-4884-9005-9696f1d81d3d" class="">Materials</h1><p id="1d899b5d-dac1-402f-a83f-f0ad75c49994" class="">Beginning of a long process of melting down PLA scraps into sheets</p><p id="d599bab5-288b-46bf-880e-90fe9887cf5d" class="">Started the process of:</p><ol type="1" id="d2c46e6a-85db-4259-b3e9-5a635912d4c0" class="numbered-list" start="1"><li>Weighing</li></ol><ol type="1" id="71f9ce7b-997e-492a-84d1-a22eb67bde97" class="numbered-list" start="2"><li>Measuring</li></ol><ol type="1" id="a836f493-2912-4749-bef8-c207dc1f6fd7" class="numbered-list" start="3"><li>Heating</li></ol><p id="75202236-3fe7-436c-85e5-540f124c0aa3" class="">In order to get a full sheet</p><p id="5dd38195-2f16-4d59-974a-a6219383042e" class="">
+</p><p id="6e5a68da-633b-4fed-9d17-a48902dcf45f" class="">Each sheet had different characteristics depending on the heating process and materials used</p><p id="a3123cc9-7c08-44c9-80ea-4705a4a21172" class="">
+</p><ol type="1" id="f3826745-535d-4265-b8f1-a6bd5d3945b9" class="numbered-list" start="1"><li>Blue/Black Sheet | Bottom Matte Finish, Top Glossy Rough Uneven Finish</li></ol><ol type="1" id="959b070c-e671-4988-8f6e-77d4958519a2" class="numbered-list" start="2"><li>Orange/White Sheet | Bottom Matte Finish, Top Smooth Flat Matte Finish</li></ol><ol type="1" id="5e38038b-0653-477c-985c-659b75765c3c" class="numbered-list" start="3"><li>Grey/White Marble Sheet | Bottom Glossy Finish, Top Glossy Flat Finish</li></ol><p id="d47156c0-5878-4df7-b225-ef05145c8323" class="">
+</p><h3 id="7b17cd19-32ba-4864-b268-d24a05ecdf00" class="">Blue Sheet</h3><p id="82b60311-28a4-4e4a-9e5c-fa0ed0d3e859" class="">
+</p><figure id="e7c1ae9a-6c37-43a4-8eb1-536a9a9e477d" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/622B7717-E2E3-4098-87C6-1951658D1900.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/622B7717-E2E3-4098-87C6-1951658D1900.jpeg"/></a></figure><figure id="e930026f-da9e-45bd-a1eb-f0f8b56e97f5" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/BDA19BE4-3643-4708-92A2-FD8E569F1A29.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/BDA19BE4-3643-4708-92A2-FD8E569F1A29.jpeg"/></a></figure><figure id="f2969cc5-7507-446b-9de8-4d6d1aa991ee" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/5F756957-7A71-4ABD-ABD9-1B126F58B0C0.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/5F756957-7A71-4ABD-ABD9-1B126F58B0C0.jpeg"/></a></figure><p id="9b9bb62d-b501-4a43-8b64-0dd2fa612518" class="">
+</p><h3 id="6417c032-76db-4563-958b-f08c5d66b799" class="">Orange Sheet</h3><p id="f3572b00-5af0-49ff-9361-0047838fd7d5" class="">
+</p><figure id="844bad10-36d1-4edd-8c2d-8ec62f5e4eb1" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/52644E71-16EB-4EA4-96FC-BF7BC6D931F3.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/52644E71-16EB-4EA4-96FC-BF7BC6D931F3.jpeg"/></a></figure><figure id="ab4e1400-95aa-4d0a-9d3c-4007dff01f9a" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/C18658F9-B1EA-4AFD-997F-635A2E5A0C5C.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/C18658F9-B1EA-4AFD-997F-635A2E5A0C5C.jpeg"/></a></figure><figure id="2557ef78-0ddb-4157-878a-f2202683440b" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/1030738C-C491-45E4-A9CD-EA067A140483.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/1030738C-C491-45E4-A9CD-EA067A140483.jpeg"/></a></figure><p id="37bed2cd-4f17-4c86-a284-b8a3f8e23f1b" class="">
+</p><p id="1c608012-c4d9-4a32-a810-bc0e85c221f6" class="">Over 5 Sheets were made by me with many more being made by members of the RePlasticing Sheets team including: Lauren, Yan, Isabelle, Eden. </p><p id="a736e4e6-d1fd-4531-a24c-bb869ddb7329" class="">
+The collective total hours spent by the team exceeds 24 hrs of just PLA sheet creation. Special Thanks to them and their contributions</p><p id="4d4e7dec-961d-4150-b0ec-ef22ea7897ac" class="">
+</p><p id="e466532a-2e32-4765-9113-36e0779573f6" class=""><strong>More Information on Sheet creation and documentation can be found on this google drive link:</strong></p><figure id="0354d28e-46e6-4cb2-b64a-189d37bc9332"><a href="https://drive.google.com/drive/folders/1KJVUPeoqSe3aw4mahjyfRSkVlulQCcrK?usp=sharing" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">RePlasticing Sheets Group Project - Google Drive</div></div><div class="bookmark-href"><img src="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" class="icon bookmark-icon"/>https://drive.google.com/drive/folders/1KJVUPeoqSe3aw4mahjyfRSkVlulQCcrK?usp=sharing</div></div><img src="https://drive-thirdparty.googleusercontent.com/128/type/application/vnd.google-apps.spreadsheet" class="bookmark-image"/></a></figure><p id="b8c2df7f-1084-4761-99cb-d0244f73ed73" class="">
+</p><h1 id="226ecd64-b9b3-4b46-a6f8-b4982759e84d" class="">Enclosure Fabrication</h1><p id="09da5a1b-3818-4609-84b1-776f50b46d21" class="">
+</p><p id="c1ee6736-d097-4d32-83fb-7552092f2543" class="">This project included:</p><p id="3d8b5e0a-e807-4bbf-b8c2-62dc7aa0e36a" class="">
+</p><ol type="1" id="502737ac-1f8e-4dc3-a186-76e0b7c3b137" class="numbered-list" start="1"><li>Orange/White Sheet | For the base plate</li></ol><ol type="1" id="1a02b616-34b8-4fbd-b3d1-fafe300d3955" class="numbered-list" start="2"><li>Blue/Black Sheet | Walls &amp; Button Mounts</li></ol><ol type="1" id="867a3b12-61d6-47c7-97bd-42d45896305f" class="numbered-list" start="3"><li>Grey/White Marble Sheet | Top Control Panel</li></ol><p id="8a74aba5-ada8-4902-b818-d0b222a7e3cb" class="">
+</p><p id="fc2ded69-f38f-4f4a-91fb-fbbebb38d5fc" class="">Each piece needed to be laser cut to certain dimensions</p><p id="82b431e4-60c1-49af-90aa-7d7079302b32" class="">
+</p><p id="ee2e7ec5-2cb2-46af-aa36-6f8f53cbdae4" class="">I designed the case to have a top and bottom plate held together by standoffs</p><p id="df76b123-66cf-48ff-8f4e-fa60afc45179" class="">Walls were later designed to house buttons and enclose all electronics</p><p id="fa705bb6-2dd3-4d17-b68b-10b5a61c77fc" class="">The final dimensions of the enclosure is 12in x 8in x 2in <div class="indented"><p id="054003d0-92ed-40c9-b895-7eea09cf70b0" class="">Designed in reference to the MadCatz Street Fighter IV SE Fightstick dimensions</p><p id="ded58ad4-0082-469b-8491-17a39a253e5f" class="">
+</p></div></p><p id="97f241c1-b1b6-40bf-8a79-ef4eb6c37139" class="">Screwholes in 4 corners to accomodate standoffs</p><p id="9a788ba8-2ec8-49ed-9f58-909e4ae25bbe" class="">5mm wide gaps to accomodate PLA walls</p><p id="36cbc71d-3a77-4c4f-a270-d48b66196e06" class="">14 24mm buttons &amp; 1 30mm button holes based on Sanwa buttons</p><h3 id="7cd70338-0539-4eaf-b3a9-476471c0916a" class="">Top Plate</h3><figure id="ef17d875-7a6c-442f-841f-a1da64dfc426" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/Untitled.png"><img style="width:966px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/Untitled.png"/></a></figure><h3 id="e12c8ff6-89ba-49b1-8ab4-825d48ca9392" class="">Bottom Plate</h3><figure id="b5db5224-bb3c-4c74-8c00-5ff95bfe1465" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/Untitled%201.png"><img style="width:868px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/Untitled%201.png"/></a></figure><h3 id="3696f81a-9364-41a4-ae2d-76ab9efd9cc4" class="">Walls</h3><figure id="6b48c64c-506c-411f-b871-edbd3293c3ae" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/Untitled%202.png"><img style="width:1684px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/Untitled%202.png"/></a></figure><p id="3d4bd4cf-4278-470f-b35b-c0f3f0459679" class="">
+</p><p id="bbd2cd19-18d3-409b-8815-fefb708cdc87" class="">With these files, I began to laser cut the sheets</p><p id="8aaf4983-cc9a-40aa-aff5-30289abc709e" class="">
+</p><p id="71baf491-7112-41f6-b8fe-7497e6be8f00" class="">The Laser Cutter used was the Epilog Fusion Laser<div class="indented"><p id="4d5316a7-7bf6-4c76-826e-386dabf9382b" class="">The Laser Settings used in these cuts were the following:</p><ol type="1" id="0ca6d620-42fa-4447-808f-c9b5913c37eb" class="numbered-list" start="1"><li>5 Speed | 100 Power | 80 Frequency</li></ol><ol type="1" id="403731b2-b5a8-4e3c-a337-8632a5a6fbf8" class="numbered-list" start="2"><li>30 Speed | 100 Power | 80 Frequency</li></ol></div></p><p id="90b53454-1ced-4548-835f-70b6963dc1a0" class="">
+</p><p id="6878ac91-3a10-49c0-898a-298294f2a765" class="">The laser would make a first pass to cut out the design and burn through all the PLA materials</p><p id="d4031985-7a80-4b1c-a5d3-ec98cf1f5d16" class=""><strong>When PLA is cut in the laser cutter, the laser melts the edges and if not removed, the PLA will begin to bond with itself again after cooling</strong></p><p id="25dd7728-db09-4007-95c0-52d898616d38" class="">The second pass is then used to quickly trim off any PLA that has bonded together so that the user can then quickly remove excess material and break off any bonded pieces before they fully set in place.</p><p id="04e6c7b8-023d-4a84-851e-e9dafb9e97a2" class="">
+</p><p id="20991666-ee48-4112-940f-7fdb93abf53e" class="">The orange sheet sides were burned due to a miscut and incorrect calibration on my part</p><figure id="b6763895-7a63-4132-a873-f34c65d62052" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/B0800FDD-ECD9-4E32-A3D1-88BD2B390B4D.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/B0800FDD-ECD9-4E32-A3D1-88BD2B390B4D.jpeg"/></a></figure><figure id="dd332f89-f43a-4654-a262-69254e4e69bb" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/7D8D9FF1-A118-4463-89BD-A82097B8C056.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/7D8D9FF1-A118-4463-89BD-A82097B8C056.jpeg"/></a></figure><figure id="40317754-93ae-4316-9022-597f3b1f10c6" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/8E1EB21A-DBCA-4A5B-AC0E-69DD303323CB.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/8E1EB21A-DBCA-4A5B-AC0E-69DD303323CB.jpeg"/></a></figure><figure id="05a299a5-3f81-48a3-958b-ed3a5851c2e6" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/AF86BD12-F36B-4A26-9FAB-AABD443D06A1.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/AF86BD12-F36B-4A26-9FAB-AABD443D06A1.jpeg"/></a></figure><figure id="7bda86a2-dc82-4772-a5ba-e6f10b7b0fe2" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/64F3BCC9-E683-4C89-9DA2-20C99B43BCE7.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/64F3BCC9-E683-4C89-9DA2-20C99B43BCE7.jpeg"/></a></figure><figure id="b0161748-15df-4db4-8ac4-6902e2e2f6ef" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/0B8CB406-0205-4089-B8CC-C15AB46634FA.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/0B8CB406-0205-4089-B8CC-C15AB46634FA.jpeg"/></a></figure><figure id="94d86fe4-8bc7-41e8-a2e6-a51de7f592b0" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/6B77558C-BEF5-44E6-AB8E-20AEF9BFCB1A.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/6B77558C-BEF5-44E6-AB8E-20AEF9BFCB1A.jpeg"/></a></figure><figure id="a3749854-27b5-482b-8b2c-c0c2b3f10aa8" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/9BCABF8E-8453-4067-B161-D73E34D17559.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/9BCABF8E-8453-4067-B161-D73E34D17559.jpeg"/></a></figure><p id="98ec57ba-2ad3-4eff-b9e1-0ccba7cb69a3" class="">
+</p><h1 id="893edc6a-063c-4866-8f8b-360ffbae397c" class="">Wiring and Electronics</h1><p id="2f93b787-994e-4a75-97ed-d801b813058e" class="">
+This is where the bulk of my time went towards.</p><p id="8a5748b8-fe16-4d6d-9fd7-e208539298ad" class="">
+</p><p id="a42612bc-a3dc-4422-80ff-86f32cece908" class="">Instead of buying precrimped, quick release wires and a full PCB, I opted for a homebrew route</p><p id="32e09b5e-827e-4f0c-9ab9-921348744960" class="">
+</p><p id="717a537d-6eae-4a16-af67-e9338e5266b9" class="">I bought a Rasberry Pi Pico and loaded it with FeralAI and Sleepunits GP2040 Firmware for easy microcontroller to gamepad mapping. Link below:</p><figure id="3d7aa0ba-093d-4fba-b978-01f61bf6cf3d"><div class="source">https://github.com/FeralAI/GP2040</div></figure><p id="6fd0367e-79da-4b5a-be37-fc651de8058d" class="">
+</p><p id="742860a1-a09a-4f62-b9b4-13d9903d4859" class="">I then used a protoboard and screw terminals which were graciously given to me by David Rios.</p><p id="d593f163-6928-4a19-b562-58fe26ba083a" class="">Thank you David Rios</p><figure id="b9e1f03c-5bba-4bf1-8e51-b7355730592f" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/7EC46492-618F-44B2-BC98-898B2620A294.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/7EC46492-618F-44B2-BC98-898B2620A294.jpeg"/></a></figure><figure id="b3633901-6968-4990-8853-ede5898662b8" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/934B340B-046A-41EB-9045-D7F5ACDD9973.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/934B340B-046A-41EB-9045-D7F5ACDD9973.jpeg"/></a></figure><p id="a0e483af-2dd3-42ea-a27d-4affe26d02c8" class="">
+</p><p id="f3f64fd3-f0fa-4417-9409-1485b40f2ff9" class="">I soldered both the Pi Pico and Screw Terminals to the Proto board and began to solder wires between the seperate pins and the screw terminals</p><figure id="f7773f1f-33b5-4caa-8969-62903e13dcee" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/951AA5AC-61E9-4912-8AC1-FB8A866DEE0E.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/951AA5AC-61E9-4912-8AC1-FB8A866DEE0E.jpeg"/></a></figure><p id="e898820a-6afb-41c8-8f48-3a393f810f94" class="">Now that the Protoboard had been prepped and was able to transmit signals from the pins to the screw terminals, I began to solder wires to the buttons</p><p id="bf6d1aa3-ea5c-439f-a4fb-312466f550ff" class="">
+</p><p id="41f52600-5198-4e79-91af-63f3dabd73bb" class="">I began by first creating a daisy chain between all the buttons for ground</p><figure id="bed57e96-3464-4a99-8d8e-9785224a4ab0" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/1FE0BD5D-923B-4585-9CF7-B1BA5B23AD5B.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/1FE0BD5D-923B-4585-9CF7-B1BA5B23AD5B.jpeg"/></a></figure><p id="c84c0df0-ae14-4b00-8274-85f95f5f1b6d" class="">
+</p><p id="53baacd2-370f-4c24-9c2d-8f3d48f64937" class="">After linking all buttons to ground, I began to painstakingly individually solder a wire to each button</p><p id="8ac01ae4-8d7b-4a78-95cc-f68db2e32d2a" class="">
+</p><figure id="03d98cde-8172-40d8-a587-7843a51f93ff" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/FE81565E-4B81-4D78-956F-119C9B59ED4D.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/FE81565E-4B81-4D78-956F-119C9B59ED4D.jpeg"/></a></figure><p id="e923c956-c176-4739-9400-955576b5fce2" class="">
+</p><p id="d5e4ab56-4428-4a79-9c68-8c468dc3a2d3" class="">After 6 hours of soldering, I had finally completed all of the button soldering</p><p id="76be617e-a479-4e2c-a448-e56f43999450" class="">
+</p><figure id="c7abae60-6a47-4786-96f0-78b8a840d045" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/8B55362F-9D6F-4785-A2A6-A02AE6C61CE2.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/8B55362F-9D6F-4785-A2A6-A02AE6C61CE2.jpeg"/></a></figure><p id="e86a4756-4a23-4f95-bd24-7b74a957e106" class="">
+</p><p id="a62fbf87-c20a-4e5a-b84b-26cfa0e5f52e" class="">While my soldering job was not perfect, it did lead to some problems with shorting. Luckily I was able to separate the board and the buttons enough to not create and shorting. </p><p id="adfddf41-9573-4bde-902e-eedab4e96892" class="">
+</p><p id="60c55c02-a2fa-47a5-9bdc-bb46a9bf5b1d" class="">I finally closed the bottom plate and the build in complete</p><p id="d9e1a972-bf4c-49b4-b75e-99520e02ac1b" class="">
+</p><figure id="2ad711c0-77a9-43f9-bdda-c25326a63b78" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/7CCCA2EB-9C86-4670-9D89-6BA453D77EA2.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/7CCCA2EB-9C86-4670-9D89-6BA453D77EA2.jpeg"/></a></figure><figure id="c8c34b12-3d14-423b-bd70-4b1f325399f8" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/C4609467-C975-44B0-BDB8-02247C39F262.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/C4609467-C975-44B0-BDB8-02247C39F262.jpeg"/></a></figure><figure id="347404d0-d4cc-40f5-a051-aa6d80333ba3" class="image"><a href="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/D2282540-722B-49C5-B7C7-624CE47C17DF%201.jpeg"><img style="width:1280px" src="PLA%20Sheet%20Controller%201c6f744977a943f281c82eba0acb57fd/D2282540-722B-49C5-B7C7-624CE47C17DF%201.jpeg"/></a></figure><figure id="76f0e55c-f380-4c97-ba6c-b1c5935a4135"><div class="source"><a href="https://www.notion.soundefined"></a></div></figure><p id="c3f999c9-34f9-4c32-9c7d-5f581936c1a6" class="">
+</p><p id="ce597568-387f-4bfb-8783-928f738594f3" class="">In total it took around 12 hours of assembly with laser cutting and wiring electronics and another ~12 hours of material making. This project has been extremely gratifying to make and I’m more than happy with the result. 
+
+Thanks to:</p><p id="7dad0574-fd82-4b28-8b54-ea35dfdd964b" class="">Blaire Simmons</p><p id="842d4d90-ce62-462d-b09c-d2949aa90d96" class="">Molly Ritmiller</p><p id="07323650-6ade-4b5e-ac02-3c19f5778d4e" class="">David Rios</p><p id="f53d3ea9-4d4d-4b65-bb74-e1e7429d00d0" class="">Dominic Barrett</p><p id="13ca3529-0f5b-4a32-833e-54db276becb7" class="">David Yang</p><p id="799715c7-9e96-4442-8c31-939833db307e" class="">Angelo Tiu</p><p id="36b113a3-58c1-4d0f-89a4-8a1e8462d25e" class="">Lauren Lumbra</p><p id="9cfef658-777d-41a7-8e71-eb8dd3f4f7f5" class="">Yan Shao</p><p id="651e890a-f0ec-46b9-880c-1c825c66307c" class="">and many more.</p><p id="a95cd6ab-20e0-42dd-ba2e-08a103df29b2" class="">
+</p></div></article></body></html>
