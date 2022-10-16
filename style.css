@@ -13,6 +13,8 @@ body{
     animation: logoAnim 2s linear infinite alternate;
 }
 
+
+
 @keyframes logoAnim {
     0% {transform: translateY(0)}
     100% {transform: translateY(20px)}
@@ -35,14 +37,16 @@ body{
     background-color: white;
 }
 
+
+
 .projectIntro{
    
     width: 500px;
     height: auto;
     display: grid;
-grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
    
-    background-color: #3737d6;
+    color: white;
     transition: background-color 5s ease-out;
 }
 
@@ -83,6 +87,11 @@ logo{
 .intro{
     text-align: center;
     margin-bottom: 100px;
+    font-weight: 1000;
+    font-size: 50px;
+}
+.intro:hover{
+    font-weight: 100;
 }
 
 .fight{
@@ -108,11 +117,26 @@ logo{
 a {
     text-decoration: none;
     color: white;
+    font-weight: 900;
     
 }
 
+
+
 .navBar a {
     color: #3737d6;
+}
+
+.navBar a:hover{
+    font-weight: 100;
+}
+
+.projectIntro a:hover{
+    font-weight: 100;
+}
+
+.projectIntro h1:hover{
+    font-weight: 100;
 }
 
 @keyframes 

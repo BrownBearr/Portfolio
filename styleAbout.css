@@ -4,6 +4,7 @@ body{
     color: #3737d6;
     margin: 0;
     padding: 0;
+    
 }
 
 .svgLogo{
@@ -22,6 +23,21 @@ body{
     width: 100%;
 }
 
+h1{
+    margin-left: 20px;
+}
+h3{
+    margin-left: 20px;
+}
+p{
+    margin-left: 20px;
+}
+
+
+.firstAbout{
+    margin-bottom: 50px;
+}
+
 .navBar{
     display: flex;
     position: fixed;
@@ -35,4 +51,19 @@ body{
     display: flex;
  
    
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: 900;
+    
+}
+
+.navBar a {
+    color: #3737d6;
+}
+
+.navBar a:hover{
+    font-weight: 100;
 }
