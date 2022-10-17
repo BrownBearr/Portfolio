@@ -7,10 +7,19 @@ body{
     
 }
 
+
+
 .svgLogo{
     width: 100px;
     height: auto;
     margin-left: 20px;
+    animation: logoAnim 2s linear infinite alternate;
+}
+
+
+@keyframes logoAnim {
+    0% {transform: translateY(0)}
+    100% {transform: translateY(20px)}
 }
 
 .nav{
