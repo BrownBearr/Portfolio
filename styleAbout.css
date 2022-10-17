@@ -34,21 +34,21 @@ p{
 }
 
 
-.firstAbout{
-    margin-bottom: 50px;
-}
+
 
 .navBar{
     display: flex;
     position: fixed;
     width: 100%;
     background-color: white;
+    
 }
 
 .profile{
     width: 50%;
     max-width: 100%;
-    display: flex;
+    margin-left: auto;
+    margin-right: auto;
  
    
 }
@@ -60,6 +60,19 @@ a {
     
 }
 
+.aboutHero{
+
+}
+
+.topicsTitle{
+    margin-right: 50px;
+}
+
+.description{
+    margin-left: 100px;
+    padding: auto;
+}
+
 .navBar a {
     color: #3737d6;
 }
@@ -67,3 +80,18 @@ a {
 .navBar a:hover{
     font-weight: 100;
 }
+
+@media screen and (min-width: 900px){
+    .aboutHero{
+        display: flex;
+    }
+
+    .topics{
+        display: flex;
+    }
+   
+
+    
+}
+    
+
