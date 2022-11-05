@@ -72,14 +72,14 @@ body{
 
 
 
-.projectStory{
-    text-align: center;
+#projectStory{
+    text-align: left;
     font-size: 24px;
     margin-bottom: 100px;
     
 }
 
-.intro{
+#intro{
     text-align: center;
     margin-bottom: 100px;
     font-weight: 1000;
