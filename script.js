@@ -16,11 +16,13 @@ window.addEventListener('click', (event) => {
 });
 
 //clicks keep count -> change background of css style.background color 
-function clickCounter()
-{
-    var x = 0;
+// function clickCounter()
+// {
+//     var x = 0;
+//     x = click
+//     if(clicks > 5)
     
-}
+// }
 
 
 function lucky()
